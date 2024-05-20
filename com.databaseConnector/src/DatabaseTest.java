@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.Arrays;
 
 public class DatabaseTest {
 
@@ -22,9 +23,17 @@ public class DatabaseTest {
         QueryResult res = con.getCurrentQueryResult();
         if (res != null) {
             String[][] data = res.getData();
+            String[] columnNames = res.getColumnNames();
+            //System.out.println(Arrays.toString(columnNames));
+            for(int i=0; i<columnNames.length;i++){
+                System.out.print(columnNames[i]);
+                if(i+1 != columnNames.length) System.out.print(" ,");
+            }
+            System.out.println();
             for (int i = 0; i < res.getRowCount(); i++) {
                 for(int j=0; j< res.getColumnCount();j++){
-                    System.out.print(data[i][j]+" ,");
+                    System.out.print(data[i][j]);
+                    if(j+1 != columnNames.length) System.out.print(" ,");
                 }
                 System.out.println();
 
